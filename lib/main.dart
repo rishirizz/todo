@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(TaskAdapter());
-  Hive.openBox<Task>('task_db');
+  await Hive.openBox<Task>('task_db');
   runApp(const MyApp());
 }
 
@@ -21,12 +21,11 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => TaskDataProvider(),
       child: MaterialApp(
-        title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const TaskPage(title: 'Flutter Demo Home Page'),
+        home: const TaskPage(),
       ),
     );
   }
