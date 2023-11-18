@@ -17,13 +17,12 @@ class TaskDataProvider extends ChangeNotifier {
 
   //add a task to a list
   addTask(String taskName) {
-    print('Task name is $taskName');
     Task task = Task();
     task.id =
         DateTime.now().toString(); //generating id based on current date time.
     task.title = taskName;
     taskBox.add(task);
-    print('Task added');
+    debugPrint('Task added');
     notifyListeners();
   }
 

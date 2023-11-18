@@ -32,11 +32,34 @@ class _TaskPageState extends State<TaskPage> {
           body: ListView.builder(
             itemCount: taskDataProvider.tasks.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  taskDataProvider.tasks[index].title!,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
+              return Dismissible(
+                key: Key(
+                  taskDataProvider.tasks[index].id.toString(),
+                ),
+                direction: DismissDirection.endToStart,
+                background: Container(
+                  color: const Color(0xffff3838),
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 30.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                onDismissed: (direction) {
+                  Provider.of<TaskDataProvider>(context, listen: false)
+                      .removeTask(index);
+                },
+                child: ListTile(
+                  title: Text(
+                    taskDataProvider.tasks[index].title!,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               );
