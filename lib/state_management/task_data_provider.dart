@@ -32,6 +32,7 @@ class TaskDataProvider extends ChangeNotifier {
     updatedTask.id = DateTime.now().toString();
     updatedTask.title = taskName;
     taskBox.putAt(index, updatedTask);
+    notifyListeners();
   }
 
   //remove a task from the list
